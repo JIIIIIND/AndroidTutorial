@@ -223,8 +223,14 @@ class MainActivity : AppCompatActivity() {
 
 - 리스트뷰, 어댑터 기본 예제
 	- <https://bite-sized-learning.tistory.com/213>
+	- <https://m.blog.naver.com/PostView.nhn?blogId=cosmosjs&logNo=221462146521&proxyReferer=https:%2F%2Fwww.google.com%2F>
+	- <https://blog.yena.io/studynote/2017/12/01/Android-Kotlin-ListView.html>
 - 커스텀 뷰 사용
 	- <http://susemi99.kr/5126/>
 	- <https://medium.com/@futureofdev/%EC%BD%94%ED%8B%80%EB%A6%B0-kotlin-customview-774e236ca034>
 - 안드로이드 LayoutInflater
 	- <https://medium.com/vingle-tech-blog/android-layoutinflater-b6e44c265408>
+	- <https://class-programming.tistory.com/22>
+- 안드로이드 레이아웃
+	- <https://recipes4dev.tistory.com/66>
+	- <https://zion830.tistory.com/7>
