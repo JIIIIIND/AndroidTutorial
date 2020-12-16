@@ -17,7 +17,6 @@ class MainViewModel : ViewModel() {
     }
 
     private fun getCoronaProperties() {
-        _response.value = "Start"
         CoronaApi.retrofitService.getProperties(
                 "EzoCrM4K%2BvEBJjeY9FGY7Mi7uqk%2FMHP3NOmqDgRJzPAWMxQ3jzznKIXQmIN6bbGEQXCPoWNqnQ6ZiQ7RFwCbSw%3D%3D",
         "1", "10", "20200310", "20200315").enqueue(

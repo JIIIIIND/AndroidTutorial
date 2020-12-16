@@ -5,37 +5,37 @@ import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
 @Root
-data class Header(@Element var resultCode: String,
-                  @Element var resultMsg: String
+data class Header(@field:Element var resultCode: String,
+                  @field:Element var resultMsg: String
 )
 
 @Root
-data class Item(@Element var accDefRate: String,
-                @Element var accExamCnt: String,
-                @Element var accExamCompCnt: String,
-                @Element var careCnt: String,
-                @Element var clearCnt: String,
-                @Element var createDt: String,
-                @Element var deathCnt: String,
-                @Element var decideCnt: String,
-                @Element var examCnt: String,
-                @Element var resultNegCnt: String,
-                @Element var seq: String,
-                @Element var stateDt: String,
-                @Element var stateTime: String,
-                @Element var updateDate: String
+data class Item(@field:Element var accDefRate: String,
+                @field:Element var accExamCnt: String,
+                @field:Element var accExamCompCnt: String,
+                @field:Element var careCnt: String,
+                @field:Element var clearCnt: String,
+                @field:Element var createDt: String,
+                @field:Element var deathCnt: String,
+                @field:Element var decideCnt: String,
+                @field:Element var examCnt: String,
+                @field:Element var resultNegCnt: String,
+                @field:Element var seq: String,
+                @field:Element var stateDt: String,
+                @field:Element var stateTime: String,
+                @field:Element var updateDate: String
 )
 
 @Root
-data class Items(@ElementList var item: List<Item>)
+data class Items(@field:ElementList var item: List<Item>)
 
 @Root
-data class Body(@Element var items: Items,
-                @Element var numOfRows: String,
-                @Element var pageNo: String,
-                @Element var totalCount: String
+data class Body(@field:Element var items: Items,
+                @field:Element var numOfRows: String,
+                @field:Element var pageNo: String,
+                @field:Element var totalCount: String
 )
 
 @Root
-data class Response(@Element var header: Header,
-                    @Element var body: Body)
+data class Response(@field:Element var header: Header,
+                    @field:Element var body: Body)
