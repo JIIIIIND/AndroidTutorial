@@ -18,13 +18,15 @@ class MainViewModel : ViewModel() {
 
     private fun getCoronaProperties() {
         _response.value = "Start"
-        CoronaApi.retrofitService.getProperties().enqueue(
-            object: Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    _response.value = response.body()
+        CoronaApi.retrofitService.getProperties(
+                "EzoCrM4K%2BvEBJjeY9FGY7Mi7uqk%2FMHP3NOmqDgRJzPAWMxQ3jzznKIXQmIN6bbGEQXCPoWNqnQ6ZiQ7RFwCbSw%3D%3D",
+        "1", "10", "20200310", "20200315").enqueue(
+            object: Callback<com.example.corona19.Response> {
+                override fun onResponse(call: Call<com.example.corona19.Response>, response: Response<com.example.corona19.Response>) {
+                    _response.value = response.body().toString()
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<com.example.corona19.Response>, t: Throwable) {
                     _response.value = "Failure: " + t.message
                 }
             })
