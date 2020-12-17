@@ -14,9 +14,9 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface CoronaApiService {
-    @GET("openapi/service/rest/Covid19/getCovid19InfStateJson")
+    @GET("openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=EzoCrM4K%2BvEBJjeY9FGY7Mi7uqk%2FMHP3NOmqDgRJzPAWMxQ3jzznKIXQmIN6bbGEQXCPoWNqnQ6ZiQ7RFwCbSw%3D%3D")
     fun getProperties(
-            @Query("serviceKey") key : String,
+//            @Query("serviceKey") key : String,
             @Query("pageNo") pageNo : String,
             @Query("numOfRows") numOfRows : String,
             @Query("startCreateDt") start : String,

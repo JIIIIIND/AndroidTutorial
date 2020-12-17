@@ -4,38 +4,36 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
-@Root
-data class Header(@field:Element var resultCode: String,
-                  @field:Element var resultMsg: String
+data class Header @JvmOverloads constructor(
+        @field:Element(name = "resultCode", required = false) var resultCode: Int? = null,
+        @field:Element(name = "resultMsg", required = false) var resultMsg: String? = null
 )
 
-@Root
-data class Item(@field:Element var accDefRate: String,
-                @field:Element var accExamCnt: String,
-                @field:Element var accExamCompCnt: String,
-                @field:Element var careCnt: String,
-                @field:Element var clearCnt: String,
-                @field:Element var createDt: String,
-                @field:Element var deathCnt: String,
-                @field:Element var decideCnt: String,
-                @field:Element var examCnt: String,
-                @field:Element var resultNegCnt: String,
-                @field:Element var seq: String,
-                @field:Element var stateDt: String,
-                @field:Element var stateTime: String,
-                @field:Element var updateDate: String
+data class Item @JvmOverloads constructor(
+        @field:Element(name = "accDefRate", required = false) var accDefRate: String? = null,
+        @field:Element(name = "accExamCnt", required = false) var accExamCnt: String? = null,
+        @field:Element(name = "accExamCompCnt", required = false) var accExamCompCnt: String? = null,
+        @field:Element(name = "careCnt", required = false) var careCnt: String? = null,
+        @field:Element(name = "clearCnt", required = false) var clearCnt: String? = null,
+        @field:Element(name = "createDt", required = false) var createDt: String? = null,
+        @field:Element(name = "deathCnt", required = false) var deathCnt: String? = null,
+        @field:Element(name = "decideCnt", required = false) var decideCnt: String? = null,
+        @field:Element(name = "examCnt", required = false) var examCnt: String? = null,
+        @field:Element(name = "resutlNegCnt", required = false) var resutlNegCnt: String? = null,
+        @field:Element(name = "seq", required = false) var seq: String? = null,
+        @field:Element(name = "stateDt", required = false) var stateDt: String? = null,
+        @field:Element(name = "stateTime", required = false) var stateTime: String? = null,
+        @field:Element(name = "updateDt", required = false) var updateDt: String? = null
 )
 
-@Root
-data class Items(@field:ElementList var item: List<Item>)
+data class Items @JvmOverloads constructor(@field:ElementList(inline = true, entry = "item") var item: List<Item>? = null)
 
-@Root
-data class Body(@field:Element var items: Items,
-                @field:Element var numOfRows: String,
-                @field:Element var pageNo: String,
-                @field:Element var totalCount: String
+data class Body @JvmOverloads constructor(
+        @field:Element(name = "items", required = false) var items: Items? = null,
+        @field:Element(name = "numOfRows", required = false) var numOfRows: String? = null,
+        @field:Element(name = "pageNo", required = false) var pageNo: String? = null,
+        @field:Element(name = "totalCount", required = false) var totalCount: String? = null
 )
 
-@Root
-data class Response(@field:Element var header: Header,
-                    @field:Element var body: Body)
+data class Response @JvmOverloads constructor(@Root(strict = false, name="header") var header: Header? = null,
+                    @Root(strict = false, name="header") var body: Body? = null)
