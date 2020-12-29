@@ -94,3 +94,78 @@ sleep-tracker의 데이터베이스는 다음을 수행할 수 있어야 합니�
 - **Get the most recent night**
 - **Delete** all entries in the database
 
+```kotlin
+@Dao
+interface SleepDatabaseDao {
+    @Insert
+    fun insert(night: SleepNight)
+
+    @Update
+    fun update(night: SleepNight)
+
+    @Query("SELECT * from daily_sleep_quality_table WHERE nightId = :key")
+    fun get(key: Long): SleepNight?
+
+    @Query("DELETE FROM daily_sleep_quality_table")
+    fun clear()
+
+    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC LIMIT 1")
+    fun getTonight(): SleepNight?
+
+    @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC")
+    fun getAllNights(): LiveData<List<SleepNight>>
+}
+```
+
+@Query annotaion은 다음과 같은 쿼리문이 작성되어야 합니다.
+
+#### Step 3: Create the database
+
+이전 단계에서 만든 Entity 및 DAO를 사용하는 Room 데이터베이스를 만듭니다.
+
+@Database로 annotation이 달린 추상 데이터베이스 홀더 클래스를 만들어야 합니다. 이 클래스에는 데이터베이스가 없는 경우 데이터베이스 인스턴스를 만들거나 기존 데이터베이스에 대한 참조를 반환하는 메서드가 하나 있습니다.
+
+Room 데이터베이스를 가져 오는 것은 약간 복잡합니다. 일반적인 프로세스는 다음과 같습니다.
+
+1. RoomDatabase를 확장하는 공용 추상 클래스를 만듭니다.
+이 클래스는 데이터베이스 홀더 역할을 합니다. Room이 사용자를 위해 구현을 생성하기 때문에 클래스는 추상적입니다.
+
+2. @Database로 클래스에 annotaion을 추가합니다.
+인수에서 데이터베이스의 Entity를 선언하고 버전 번호를 설정합니다.
+
+3. 컴패니언 객체 내에서 SleepDatabase를 반환하는 추상 메서드 또는 속성을 정의합니다.
+Room은 body를 생성 할 것입니다.
+
+4. 전체 앱에 대해 Room 데이터베이스의 인스턴스 하나만 필요하므로 RoomDatabase를 싱글톤으로 만듭니다.
+
+5. 데이터베이스가 없는 경우에만 Room의 데이터베이스 빌더를 사용하여 데이터베이스를 만듭니다.
+그렇지 않은 경우엔 기존의 데이터베이스를 반환합니다.
+
+```kotlin
+@Database(entities = [SleepNight::class], version = 1, exportSchema = false)
+abstract class SleepDatabase : RoomDatabase() {
+    abstract val sleepDatabaseDao: SleepDatabaseDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: SleepDatabase? = null
+
+        fun getInstance(context: Context): SleepDatabase {
+            synchronized(this) {
+                var instance = INSTANCE
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                            context.applicationContext,
+                            SleepDatabase::class.java,
+                            "sleep_history_database"
+                    )
+                            .fallbackToDestructiveMigration()
+                            .build()
+                    INSTANCE = instance
+                }
+                return instance
+            }
+        }
+    }
+}
+```
