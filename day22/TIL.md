@@ -64,3 +64,63 @@ val binding = ActivityMainBinding.inflate(layoutInflater)
 val binding = ActivityMainBinding.bind(rootView)
 ```
 
+바인딩 클래스 이름을 미리 알지 못하는 경우는 DataBindingUtil 클래스를 활용할 수 있습니다.
+
+액티비티의 setContentView를 다음과 같이 대체할 수도 있습니다.
+
+```kotlin
+val binding : ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+```
+
+#### 바인딩 클래스 이름 사용자화 하기
+
+기본적인 바인딩 클래스의 이름을 변경하고 싶다면 ```<data>``` 태그 내에 class 속성을 사용할 수 있습니다.
+예를 들어 현재 모듈의 패키지명이 com.charlezz라고 가정하고 com.charlezz.databinding 패키지에 ContactItem 바인딩 클래스를 생성하고 싶다면 다음과 같이 지정할 수 있습니다.
+
+```xml
+<data class="ContactItem">
+	...
+</data>
+```
+
+databinding 패키지가 아닌 다른 패키지에 저장하려면 온점을 통해 현재 모듈 내의 패키지에 클래스를 생성할 수 있습니다. com.charlezz.ContactItem 클래스를 만드는 예제는 다음과 같습니다.
+
+```xml
+<data class=".ContactItem">
+	...
+</data>
+```
+
+전체 패키지명을 다시 지정할 수도 있는데 com.example 패키지에 ContactItem 바인딩 클래스를 생성한다고 가정하면 다음 예제와 같습니다.
+
+```xml
+<data class="com.example.ContactItem">
+	...
+</data>
+```
+
+#### ID로 View 참조하기
+
+바인딩 클래스를 사용하면 findViewById()를 호출할 필요가 없습니다. 바인딩 클래스 내부에서 미리 findViewById()를 호출한 결과를 캐싱해 두기 때문입니다.
+
+```xml
+<layout>
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android">
+		android:id="@+id/root"
+		android:layout_width="match_parent"
+		anrdoid:layout_height="match_parent" >
+	
+	<TextView
+		android:id="@+id/tv"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="hello world!" >
+</layout>
+```
+
+```kotlin
+val rootLayout : LinearLayout = binding.root
+val textView : TextView = binding.tv
+textView.setText("Hello Charles")
+```
