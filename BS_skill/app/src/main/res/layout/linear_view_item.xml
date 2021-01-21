@@ -4,7 +4,7 @@
     <data>
         <variable
             name="skill"
-            type="com.example.bs_skill.Data.Skill" />
+            type="com.example.bs_skill.data.Skill" />
     </data>
     <FrameLayout
         android:layout_width="wrap_content"

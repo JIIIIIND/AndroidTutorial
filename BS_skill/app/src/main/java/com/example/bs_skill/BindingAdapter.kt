@@ -6,8 +6,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.bs_skill.Data.Skill
-import com.example.bs_skill.Skill.SkillAdapter
+import com.example.bs_skill.data.Skill
+import com.example.bs_skill.skill.SkillAdapter
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {

@@ -3,18 +3,9 @@ package com.example.bs_skill
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.bs_skill.Data.*
-import com.example.bs_skill.Skill.SkillAdapter
-import com.example.bs_skill.Skill.SkillViewModel
+import com.example.bs_skill.skill.SkillAdapter
+import com.example.bs_skill.skill.SkillViewModel
 import com.example.bs_skill.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.jsoup.nodes.Element
 
 class MainActivity : AppCompatActivity() {
 

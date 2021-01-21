@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.bs_skill.Skill.SkillViewModel" />
+            type="com.example.bs_skill.skill.SkillViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
