@@ -1,0 +1,21 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="skill"
+            type="com.example.bs_skill.Data.Skill" />
+    </data>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/skill_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_launcher_foreground"
+            tools:src="@tools:sample/backgrounds/scenic"
+            app:imageUrl="@{skill.img}" />
+    </FrameLayout>
+</layout>
