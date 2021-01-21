@@ -1,5 +1,6 @@
 package com.example.bs_skill.skill
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,9 +24,9 @@ class SkillViewModel : ViewModel() {
         get() = _skillOrder
 
     init {
-        _character.value = getCharacterList()
-        _skill.value = getSkillList()
-        _skillOrder.value = getSkillOrderList()
+        getCharacterList()
+        getSkillList()
+        getSkillOrderList()
     }
 
     private fun getCharacterList() : List<Character>{
@@ -39,10 +40,11 @@ class SkillViewModel : ViewModel() {
                         data.child(0).childNode(1).attr("alt")
                     )
                 )
-                _character.postValue(list)
+                _character.postValue(list.toMutableList())
+                Log.d("character: ", list.get(list.size - 1).name)
             }
         }
-        return list
+        return list.toMutableList()
     }
 
     private fun getSkillList() : List<Skill>{
@@ -56,10 +58,11 @@ class SkillViewModel : ViewModel() {
                         data.childNode(1).childNode(1).attr("alt"),
                         "${data.childNode(1).childNode(3).childNode(0)}")
                 )
-                _skill.postValue(list)
+                Log.d("cskill: ", list.get(list.size - 1).name)
+                _skill.postValue(list.toMutableList())
             }
         }
-        return list
+        return list.toMutableList()
     }
 
     private fun getSkillOrderList() : List<String> {
@@ -70,6 +73,7 @@ class SkillViewModel : ViewModel() {
             for (data in upgradeOrder) {
                 list.add("${data.childNode(1).childNode(0)}")
                 _skillOrder.postValue(list)
+                Log.d("order: ", list.get(list.size - 1))
             }
         }
         return list

@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/skill_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ic_launcher_foreground"
             tools:src="@tools:sample/backgrounds/scenic"
             app:imageUrl="@{skill.img}" />
