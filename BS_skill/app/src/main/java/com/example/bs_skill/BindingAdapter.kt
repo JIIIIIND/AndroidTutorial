@@ -6,6 +6,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.bs_skill.character.CharacterAdapter
+import com.example.bs_skill.data.Character
 import com.example.bs_skill.data.Skill
 import com.example.bs_skill.skill.SkillAdapter
 
@@ -27,7 +29,14 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView,
-                     data: List<Skill>?) {
+                     data: ArrayList<Skill>?) {
     val adapter = recyclerView.adapter as SkillAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("characterList")
+fun bindCharacterList(recyclerView: RecyclerView,
+                     data: ArrayList<Character>?) {
+    val adapter = recyclerView.adapter as CharacterAdapter
     adapter.submitList(data)
 }

@@ -16,6 +16,8 @@
             android:layout_height="50dp"
             android:src="@drawable/ic_launcher_foreground"
             tools:src="@tools:sample/backgrounds/scenic"
-            app:imageUrl="@{skill.img}" />
+            android:layout_marginStart="6dp"
+            app:imageUrl="@{skill.img}"
+            android:layout_marginLeft="6dp" />
     </FrameLayout>
 </layout>

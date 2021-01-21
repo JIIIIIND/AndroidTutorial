@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.bs_skill.character.CharacterViewModel
 import com.example.bs_skill.data.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,44 +12,22 @@ import kotlinx.coroutines.launch
 import org.jsoup.nodes.Element
 
 class SkillViewModel : ViewModel() {
-    private val _character = MutableLiveData<List<Character>>()
-    val character: LiveData<List<Character>>
-        get() = _character
 
-    private val _skill = MutableLiveData<List<Skill>>()
-    val skill: LiveData<List<Skill>>
+    private val _skill = MutableLiveData<ArrayList<Skill>>()
+    val skill: LiveData<ArrayList<Skill>>
         get() = _skill
 
-    private val _skillOrder = MutableLiveData<List<String>>()
-    val skillOrder: LiveData<List<String>>
+    private val _skillOrder = MutableLiveData<ArrayList<String>>()
+    val skillOrder: LiveData<ArrayList<String>>
         get() = _skillOrder
 
     init {
-        getCharacterList()
         getSkillList()
         getSkillOrderList()
     }
 
-    private fun getCharacterList() : List<Character>{
-        val list = mutableListOf<Character>()
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = getCharacter()
-            for (data in result) {
-                list.add(
-                    Character(
-                        data.child(0).childNode(1).attr("src"),
-                        data.child(0).childNode(1).attr("alt")
-                    )
-                )
-                _character.postValue(list.toMutableList())
-                Log.d("character: ", list.get(list.size - 1).name)
-            }
-        }
-        return list.toMutableList()
-    }
-
-    private fun getSkillList() : List<Skill>{
-        val list = mutableListOf<Skill>()
+    private fun getSkillList() : ArrayList<Skill>{
+        val list = ArrayList<Skill>()
         CoroutineScope(Dispatchers.IO).launch {
             val result = getSkillImg()
             for (data in result) {
@@ -59,14 +38,14 @@ class SkillViewModel : ViewModel() {
                         "${data.childNode(1).childNode(3).childNode(0)}")
                 )
                 Log.d("cskill: ", list.get(list.size - 1).name)
-                _skill.postValue(list.toMutableList())
+                _skill.postValue(list)
             }
         }
-        return list.toMutableList()
+        return list
     }
 
     private fun getSkillOrderList() : List<String> {
-        val list = mutableListOf<String>()
+        val list = ArrayList<String>()
         CoroutineScope(Dispatchers.IO).launch {
             val result = getSkillUpgrade()
             val upgradeOrder = result[0].childNode(3).childNodes().filter { it is Element }
