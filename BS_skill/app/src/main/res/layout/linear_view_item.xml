@@ -6,18 +6,35 @@
             name="skill"
             type="com.example.bs_skill.data.Skill" />
     </data>
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="6dp">
 
         <ImageView
-            android:id="@+id/skill_img"
+            android:id="@+id/character_img"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_launcher_foreground"
-            tools:src="@tools:sample/backgrounds/scenic"
-            android:layout_marginStart="6dp"
             app:imageUrl="@{skill.img}"
-            android:layout_marginLeft="6dp" />
-    </FrameLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/character_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{skill.name}"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.513"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/character_img"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="test" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

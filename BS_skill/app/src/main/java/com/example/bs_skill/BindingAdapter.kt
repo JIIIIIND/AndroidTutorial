@@ -9,11 +9,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.bs_skill.character.CharacterAdapter
 import com.example.bs_skill.data.Character
 import com.example.bs_skill.data.Skill
+import com.example.bs_skill.data.SkillOrder
 import com.example.bs_skill.skill.SkillAdapter
+import com.example.bs_skill.skill.SkillOrderAdapter
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
-    if (imgUrl != null) {
+    if (imgUrl != null || imgUrl == "") {
         Log.d("image: ", imgUrl)
     } else Log.d("image: ", "null")
     imgUrl?.let {
@@ -31,6 +33,13 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 fun bindRecyclerView(recyclerView: RecyclerView,
                      data: ArrayList<Skill>?) {
     val adapter = recyclerView.adapter as SkillAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("orderData")
+fun bindOrderView(recyclerView: RecyclerView,
+                  data: ArrayList<SkillOrder>?) {
+    val adapter = recyclerView.adapter as SkillOrderAdapter
     adapter.submitList(data)
 }
 

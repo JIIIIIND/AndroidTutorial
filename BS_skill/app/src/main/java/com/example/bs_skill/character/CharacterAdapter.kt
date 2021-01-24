@@ -1,6 +1,7 @@
 package com.example.bs_skill.character
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bs_skill.data.Character
 import com.example.bs_skill.databinding.GridViewItemBinding
 
-class CharacterAdapter :
+class CharacterAdapter(private val onClickListener: OnClickListener) :
         ListAdapter<Character, CharacterAdapter.CharacterViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         return CharacterViewHolder(GridViewItemBinding.inflate(
@@ -17,6 +18,9 @@ class CharacterAdapter :
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = getItem(position)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(character)
+        }
         holder.bind(character)
     }
 
@@ -36,5 +40,9 @@ class CharacterAdapter :
             binding.character = character
             binding.executePendingBindings()
         }
+    }
+
+    class OnClickListener(val clickListener: (character: Character) -> Unit) {
+        fun onClick(character: Character) = clickListener(character)
     }
 }

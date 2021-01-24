@@ -4,6 +4,10 @@ data class Skill(
         val img : String, val name: String, val command: String
 )
 
+data class SkillOrder(
+        val level: String, val command: String
+)
+
 data class Character(
-        val img : String, val name: String
+        val img : String, val name: String, val url: String
 )

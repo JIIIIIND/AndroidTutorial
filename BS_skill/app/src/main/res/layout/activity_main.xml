@@ -36,12 +36,10 @@
             android:padding="6dp"
             app:layoutManager=
                 "androidx.recyclerview.widget.LinearLayoutManager"
-
             app:layout_constraintTop_toBottomOf="@id/character_img_main"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-
+            app:layout_constraintBottom_toTopOf="@id/skill_order_list"
             app:spanCount="6"
             tools:listitem="@layout/linear_view_item"
             app:listData="@{viewModel.skill}"
@@ -52,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_launcher_foreground"
-            app:imageUrl="@{characterViewModel.character.size() > 0 ? characterViewModel.character.get(0).img : null}"
+            app:imageUrl="@{characterViewModel.characterImg}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.052"
@@ -60,6 +58,22 @@
             app:layout_constraintTop_toTopOf="@id/character_list"
             app:layout_constraintVertical_bias="0.329" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/skill_order_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            app:layoutManager=
+                "androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/skill_list"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:spanCount="20"
+            tools:listitem="@layout/skill_order_item"
+            app:orderData="@{viewModel.skillOrder}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

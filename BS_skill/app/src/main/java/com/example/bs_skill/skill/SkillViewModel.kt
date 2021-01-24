@@ -17,8 +17,8 @@ class SkillViewModel : ViewModel() {
     val skill: LiveData<ArrayList<Skill>>
         get() = _skill
 
-    private val _skillOrder = MutableLiveData<ArrayList<String>>()
-    val skillOrder: LiveData<ArrayList<String>>
+    private val _skillOrder = MutableLiveData<ArrayList<SkillOrder>>()
+    val skillOrder: LiveData<ArrayList<SkillOrder>>
         get() = _skillOrder
 
     init {
@@ -26,10 +26,10 @@ class SkillViewModel : ViewModel() {
         getSkillOrderList()
     }
 
-    private fun getSkillList() : ArrayList<Skill>{
+    fun getSkillList(url: String = "") : ArrayList<Skill>{
         val list = ArrayList<Skill>()
         CoroutineScope(Dispatchers.IO).launch {
-            val result = getSkillImg()
+            val result = if (url == "") getSkillImg() else getSkillImg(url)
             for (data in result) {
                 list.add(
                     Skill(
@@ -44,16 +44,23 @@ class SkillViewModel : ViewModel() {
         return list
     }
 
-    private fun getSkillOrderList() : List<String> {
-        val list = ArrayList<String>()
+    fun getSkillOrderList(url: String = "") : List<SkillOrder> {
+        val list = ArrayList<SkillOrder>()
         CoroutineScope(Dispatchers.IO).launch {
-            val result = getSkillUpgrade()
-            val upgradeOrder = result[0].childNode(3).childNodes().filter { it is Element }
-            for (data in upgradeOrder) {
-                list.add("${data.childNode(1).childNode(0)}")
-                _skillOrder.postValue(list)
-                Log.d("order: ", list.get(list.size - 1))
-            }
+            val result = (if (url == "") getSkillUpgrade() else getSkillUpgrade(url))
+//            val upgradeOrder = result[0].childNode(3).childNodes().filter { it is Element }
+            if (result.size != 0 && result.size % 40 == 0) {
+                for (i in 0 until 20) {
+                    list.add(
+                            SkillOrder(
+                                    (i + 1).toString(),
+                                    "${result[i + 20]?.childNode(1)?.childNode(0)}"
+                            )
+                    )
+                    _skillOrder.postValue(list)
+                    Log.d("order: ", list.get(list.size - 1).command)
+                }
+            } else _skillOrder.postValue(list)
         }
         return list
     }
